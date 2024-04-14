@@ -26,13 +26,8 @@ class Workers {
 
 let WorkerMas: Workers[] = [];
 
-const showlist = () => {
-  const name = nameDOM.value;
-  const surname = surnameDOM.value;
-  const salary = salaryDOM.valueAsNumber;
-  WorkerMas.push(new Workers(name, surname, salary));
-  console.log(WorkerMas);
 
+const showList = () => {
   workersDOM.innerHTML = '';
   WorkerMas.forEach((w, i) => {
     const li = document.createElement('li');
@@ -47,11 +42,23 @@ const showlist = () => {
     deleteBtn.onclick = () => {
       console.log(i);
       WorkerMas.splice(i, 1);
-      showlist()
+      showList();
     };
     workersDOM.appendChild(deleteBtn);
   });
+
 }
 
+const addWorker = () => {
+  const name = nameDOM.value;
+  const surname = surnameDOM.value;
+  const salary = salaryDOM.valueAsNumber;
+  nameDOM.value = '';
+  surnameDOM.value = '';
+  salaryDOM.value = '';
+  WorkerMas.push(new Workers(name, surname, salary));
+ 
+  showList();
+}
 
-addBtn.onclick = showlist;
+addBtn.onclick = addWorker;
